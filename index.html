@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Convertisseur</title>
+
+<style>
+  body {
+    font-family: Arial;
+    background: #1a1a2e;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .box {
+    background: #252545;
+    padding: 30px;
+    border-radius: 10px;
+    width: 320px;
+    text-align: center;
+  }
+
+  input, select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+  }
+
+  button {
+    padding: 10px;
+    width: 100%;
+    background: #c9a96e;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  .result {
+    margin-top: 15px;
+    font-size: 18px;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="box">
+  <h2>🔄 Convertisseur</h2>
+
+  <input type="number" id="value" placeholder="Entrez une valeur">
+
+  <select id="type">
+    <option value="eurusd">€ → $</option>
+    <option value="usdeur">$ → €</option>
+    <option value="ctof">°C → °F</option>
+    <option value="ftoc">°F → °C</option>
+  </select>
+
+  <button onclick="convert()">Convertir</button>
+
+  <div class="result" id="result"></div>
+</div>
+
+<script>
+function convert() {
+  const value = parseFloat(document.getElementById("value").value);
+  const type = document.getElementById("type").value;
+  let result = "";
+
+  if (isNaN(value)) {
+    result = "Entrez une valeur valide";
+  } else {
+    switch(type) {
+      case "eurusd":
+        result = (value * 1.1).toFixed(2) + " $";
+        break;
+      case "usdeur":
+        result = (value * 0.9).toFixed(2) + " €";
+        break;
+      case "ctof":
+        result = ((value * 9/5) + 32).toFixed(2) + " °F";
+        break;
+      case "ftoc":
+        result = ((value - 32) * 5/9).toFixed(2) + " °C";
+        break;
+    }
+  }
+
+  document.getElementById("result").textContent = result;
+}
+</script>
+
+</body>
+</html>
